@@ -16,7 +16,7 @@
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<!--Displayed users menu in the footer-->
 		<div class="main-navigation">
-			<div>Footer Menu by Me )</div>
+			<div>Footer Menu from the HELL )</div>
 			<?php wp_nav_menu( array( 'theme_location' => 'bottom') ); ?>
 		</div><!-- footer-navigation, class 'main-navigation' like as main navigation-->
 		<div class="site-info">
