@@ -163,4 +163,4 @@ function get_first_link (){
 		return false;
 	return esc_url_raw($matches[1]);
 }
-//Hello from Hell )
+//Second "Hello from Hell" )
