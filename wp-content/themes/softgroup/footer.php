@@ -14,6 +14,12 @@
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
+		<!--Displayed Widget created by me in the footer-->
+		<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
+			<div id="secondary" class="widget-area" role="complementary">
+			<?php dynamic_sidebar( 'my-sidebar' ); ?>
+			</div>
+		<?php endif; ?>
 		<!--Displayed users menu in the footer-->
 		<div class="main-navigation">
 			<div>Footer Menu from the HELL )</div>

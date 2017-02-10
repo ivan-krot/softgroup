@@ -90,6 +90,15 @@ add_action( 'after_setup_theme', 'softgroup_content_width', 0 );
  */
 function softgroup_widgets_init() {
 	register_sidebar( array(
+		'name' => esc_html__( 'My Sidebar', 'softgroup' ),
+		'id' => 'my-sidebar',
+		'description' => esc_html__( 'The main sidebar appears on the right on each page except the front page template', 'softgroup' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
 		'name'          => esc_html__( 'Sidebar', 'softgroup' ),
 		'id'            => 'sidebar-1',
 		'description'   => esc_html__( 'Add widgets here.', 'softgroup' ),
@@ -164,3 +173,6 @@ function get_first_link (){
 	return esc_url_raw($matches[1]);
 }
 //Second "Hello from Hell" )
+
+//sidebar registration
+
