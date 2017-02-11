@@ -52,8 +52,53 @@ class List_Pages_Widget extends WP_Widget {
   	$instance[ 'depth' ] = strip_tags( $new_instance[ 'depth' ] );
   	return $instance;  
   }    
-	function widget( $args, $instance ) {      
-	}  
+  function widget( $args, $instance ) {
+
+    // kick things off
+  	extract( $args );
+  	echo $before_widget;    	
+  	echo $before_title . 'In this section:' . $after_title; 	
+
+    // run a query if on a page
+  	if ( is_page() ) {
+
+        // run the check_for_page_tree function to fetch top level page
+  		$ancestor = check_for_page_tree();
+
+        // set the arguments for children of the ancestor page
+  		$args = array(
+  			'child_of' => $ancestor,
+  			'depth' => $instance[ 'depth' ],
+  			'title_li' => '',
+  			);
+
+        // set a value for get_pages to check if it's empty
+  		$list_pages = get_pages( $args );
+
+        // check if $list_pages has values
+  		if( $list_pages ) {
+
+            // open a list with the ancestor page at the top
+  			?>
+  			<ul class="page-tree">
+  				<?php // list ancestor page ?>
+  				<li class="ancestor">
+  					<a href="<?php echo get_permalink( $ancestor ); ?>"><?php echo get_the_title( $ancestor ); ?></a>
+  				</li>
+
+  				<?php
+                // use wp_list_pages to list subpages of ancestor or current page
+  				wp_list_pages( $args );;
+            // close the page-tree list
+  				?>
+  			</ul>
+
+  			<?php
+  		}
+  	}
+
+
+  }  
 }
 
 //register widget
