@@ -52,7 +52,7 @@ class Post_Format_Widget extends WP_Widget {
     echo $before_title . 'Latest post with '. $instance[ 'depth' ] . ' format.' . $after_title;
 
     $args = array(
-      'numberposts' => 1000,
+      'numberposts' => -1,
       'category'    => 0,
       'orderby'     => 'date',
       'order'       => 'DESC',

@@ -30,7 +30,7 @@ class Trainee_Widget extends WP_Widget {
    value="<?php echo $instance['title']; ?>" />
    <?php
    $arguments = array(
-    'numberposts' => 1000,
+    'numberposts' => -1,
     'category'    => 0,
     'orderby'     => 'date',
     'order'       => 'DESC',
@@ -50,7 +50,7 @@ class Trainee_Widget extends WP_Widget {
       foreach ( $unique_formats as $format ) {
         echo '<option value="' . $format . '"'
         . selected( $instance['format'], $format, false )
-        . '>' . $i.$format . "</option>\n";
+        . '>' .$format . "</option>\n";
       }
       ?>
     </select>
@@ -67,7 +67,7 @@ function widget( $args, $instance ) {
   <h2 class="widget-title"><?php echo $instance[ 'title' ]; ?> (<?php echo $instance[ 'format' ]; ?>)</h2>
  <?php
  $arguments = array(
-    'numberposts' => 1000,
+    'numberposts' => -1,
     'category'    => 0,
     'orderby'     => 'date',
     'order'       => 'DESC',
