@@ -45,7 +45,7 @@ function softgroup_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'menu-1' => esc_html__( 'Primary', 'softgroup' ),
-	) );
+		) );
 
 	/*
 	 * Switch default core markup for search form, comment form, and comments
@@ -57,13 +57,13 @@ function softgroup_setup() {
 		'comment-list',
 		'gallery',
 		'caption',
-	) );
+		) );
 
 	// Set up the WordPress core custom background feature.
 	add_theme_support( 'custom-background', apply_filters( 'softgroup_custom_background_args', array(
 		'default-color' => 'ffffff',
 		'default-image' => '',
-	) ) );
+		) ) );
 
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
@@ -97,7 +97,7 @@ function softgroup_widgets_init() {
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
-	) );
+		) );
 	register_sidebar( array(
 		'name' => esc_html__( 'My Sidebar', 'softgroup' ),
 		'id' => 'my-sidebar',
@@ -106,7 +106,7 @@ function softgroup_widgets_init() {
 		'after_widget' => '</aside>',
 		'before_title' => '<h2 class="widget-title">',
 		'after_title' => '</h2>',
-	) );
+		) );
 }
 add_action( 'widgets_init', 'softgroup_widgets_init' );
 
@@ -161,7 +161,7 @@ add_theme_support( 'post-formats', array( 'aside', 'status', 'quote', 'chat', 'l
 register_nav_menus(array(
 	'bottom' => 'Footer',
 	'sidebar' => 'Sidebar'
-));
+	));
 
 // post formats for Page type
 add_post_type_support( 'page', 'post-formats' );
@@ -176,3 +176,225 @@ function get_first_link (){
 
 //our sidebar registration on line 91
 
+//START ADD NEW ELEMETT TO CUSTOMIZATION
+
+function course_register_theme_customizer( $wp_customize ) {
+
+	//Add settings
+	$wp_customize->add_setting(
+		'cource_link_color',
+		array(
+			'default'     => '#000000'
+			)
+		);
+
+// add control
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'link_color',
+			array(
+				'label'      => __( 'Link Color', 'cource' ),
+				'section'    => 'colors',
+				'settings'   => 'cource_link_color'
+				)
+			)
+		);
+
+// Update Settings
+	function cource_customizer_css() {
+		?>
+		<style type="text/css">
+			a { color: <?php echo get_theme_mod( 'cource_link_color' ); ?>; }
+		</style>
+		<?php
+	}
+	add_action( 'wp_head', 'cource_customizer_css' );
+
+// Update options
+	$wp_customize->add_setting(
+		'course_link_color',
+		array(
+			'default'     => '#000000',
+			'transport'   => 'postMessage'
+			)
+		);
+
+
+// Add live preview function and registering new JS file
+	function course_customizer_live_preview() {
+		wp_enqueue_script(
+			'course-theme-customizer',
+			get_template_directory_uri() . '/js/theme-customizer.js',
+			array( 'jquery', 'customize-preview' ),
+			'0.3.0',
+			true
+			);
+	}
+	add_action( 'customize_preview_init', 'course_customizer_live_preview' );
+
+//NEW SECTION
+	// Add new section
+	$wp_customize->add_section(
+		'social_options',
+		array(
+			'title'     =>  'Social',
+			'priority'  => 200,
+			)
+		);
+/*
+SEPARATOR
+*/
+//Add settings
+	$wp_customize->add_setting(
+		'separator',
+		array(
+			'section' => 'social_options',
+			'default'     => '-',
+			'transport'   => 'postMessage',
+			)
+		);
+
+	$wp_customize->add_control( 'separator', array(
+	'label' => 'Separator between Title & Category List',
+	'section' => 'social_options',
+	'settings' => 'separator',
+	'type' => 'text',
+	'priority' => 1
+	) );
+
+
+	//Add settings
+	$wp_customize->add_setting(
+		'facebook',
+		array(
+			'section' => 'social_options',
+			'default'     => '',
+			'transport'   => 'postMessage',
+			)
+		);
+
+	// add control
+$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'facebook', array(
+	'label' => 'Icon of facebook :',
+	'section' => 'social_options',
+	'settings' => 'facebook',
+	'priority' => 7
+	) ) );
+
+$wp_customize->add_setting(
+	'facebook-link',
+	array(
+		'section' => 'social_options',
+		'default'     => 'https://www.facebook.com/',
+		'transport'   => 'postMessage',
+		)
+	);
+
+$wp_customize->add_control( 'facebook-link', array(
+	'label' => 'You page in Facebook',
+	'section' => 'social_options',
+	'type' => 'text',
+	'priority' => 8
+	) );
+
+//Add settings
+$wp_customize->add_setting(
+	'vk',
+	array(
+		'section' => 'social_options',
+		'default'     => '',
+		'transport'   => 'postMessage',
+		)
+	);
+/*
+
+*/
+	// add control
+$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'vk', array(
+	'label' => 'Icon of vk :',
+	'section' => 'social_options',
+	'settings' => 'vk',
+	'priority' => 3
+	) ) );
+
+$wp_customize->add_setting(
+	'vk-link',
+	array(
+		'section' => 'social_options',
+		'default'     => 'https://www.vk.com/',
+		'transport'   => 'postMessage',
+		)
+	);
+
+$wp_customize->add_control( 'vk-link', array(
+	'label' => 'You page in VK',
+	'section' => 'social_options',
+	'type' => 'text',
+	'priority' => 4
+	) );
+
+//Add settings
+	$wp_customize->add_setting(
+		'google',
+		array(
+			'section' => 'social_options',
+			'default'     => '',
+			'transport'   => 'postMessage',
+			)
+		);
+
+	// add control
+$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'google', array(
+	'label' => 'Icon of Google+ :',
+	'section' => 'social_options',
+	'settings' => 'google',
+	'priority' => 5
+	) ) );
+
+$wp_customize->add_setting(
+	'google-link',
+	array(
+		'section' => 'social_options',
+		'default'     => 'https://www.google.com/',
+		'transport'   => 'postMessage',
+		)
+	);
+
+$wp_customize->add_control( 'google-link', array(
+	'label' => 'You page in Google',
+	'section' => 'social_options',
+	'type' => 'text',
+	'priority' => 6
+	) );
+
+
+
+    //Add settings
+$wp_customize->add_setting(
+	'course_link_color',
+	array(
+		'default'     => '#000000',
+		'transport'   => 'postMessage'
+		)
+	);
+
+	// add control
+$wp_customize->add_control(
+	new WP_Customize_Color_Control(
+		$wp_customize,
+		'link_color',
+		array(
+			'label'      => __( 'Link Color', 'course' ),
+			'section'    => 'colors',
+			'settings'   => 'course_link_color'
+			)
+		)
+	);
+
+
+
+}
+add_action( 'customize_register', 'course_register_theme_customizer');
+
+//END ADD NEW ELEMETT TO CUSTOMIZATION

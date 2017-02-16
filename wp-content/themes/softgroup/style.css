@@ -30,6 +30,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.io/normalize.css/
 # Navigation
 	## Links
 	## Menus
+	## Social icons
 # Accessibility
 # Alignments
 # Clearings
@@ -640,6 +641,24 @@ a:active {
 	float: right;
 	text-align: right;
 	width: 50%;
+}
+
+/*--------------------------------------------------------------
+## Social icons
+--------------------------------------------------------------*/
+
+#social li{
+	list-style: none;
+	float: left;
+	width: 6%;
+	padding: 0.5em;
+	opacity: 0.8;
+	transition: all ease-in-out .5s;
+}
+
+#social li:hover {
+	opacity: 1;
+	transition: all ease-in-out .5s;
 }
 
 /*--------------------------------------------------------------

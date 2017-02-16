@@ -19,7 +19,7 @@ function get_child_pages_by_parent($id, $depth) {
 			while ($child->have_posts() ) :
 				$child ->the_post();
 			?>
-			<li><a href="<?php the_permalink(); ?>" target="_blank"><?php the_title(); the_id(); ?></a></li>
+			<li><a href="<?php the_permalink(); ?>" target="_blank"><?php the_title(); ?></a></li>
 			<?php
 			$id = get_the_ID();
 			$depth--;
